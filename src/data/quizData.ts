@@ -1,0 +1,257 @@
+export interface QuizOption {
+  id: string;
+  text: string;
+  isCorrect: boolean;
+  emoji?: string;
+  note?: string;
+}
+
+export interface Question {
+  id: number;
+  questionNumberText: string;
+  title: string;
+  slogan: string;
+  options: QuizOption[];
+}
+
+export interface Prize {
+  id: string;
+  title: string;
+  badge: string;
+  description: string;
+  terms: string;
+  weight: number; // probability weight
+  icon: string;
+  isRare?: boolean;
+}
+
+// 3 Fixed Questions Requested by User
+export const FIXED_QUESTIONS: Question[] = [
+  {
+    id: 1,
+    questionNumberText: "السؤال الأول",
+    title: "تعد واحدة من أكلات الملك سلمان المفضلة:",
+    slogan: "من نكهة الماضي .. لصناعة مستقبل أجمل",
+    options: [
+      {
+        id: "q1-1",
+        text: "المصابيب",
+        isCorrect: false,
+        emoji: "🫓",
+      },
+      {
+        id: "q1-2",
+        text: "المرقوق",
+        isCorrect: false,
+        emoji: "🍲",
+      },
+      {
+        id: "q1-3",
+        text: "الجريش",
+        isCorrect: false,
+        emoji: "🥣",
+      },
+      {
+        id: "q1-4",
+        text: "المقشوش",
+        isCorrect: true,
+        emoji: "🥞",
+      },
+    ],
+  },
+  {
+    id: 2,
+    questionNumberText: "السؤال الثاني",
+    title: "يعد طبق الحلويات الوطني للمملكة العربية السعودية:",
+    slogan: "أكلاتنا .. تجمعنا",
+    options: [
+      {
+        id: "q2-1",
+        text: "الكليجا",
+        isCorrect: false,
+        emoji: "🍪",
+      },
+      {
+        id: "q2-2",
+        text: "المقشوش",
+        isCorrect: true,
+        emoji: "🥞",
+      },
+      {
+        id: "q2-3",
+        text: "العصيدة",
+        isCorrect: false,
+        emoji: "🍯",
+      },
+      {
+        id: "q2-4",
+        text: "مصابيب العسل",
+        isCorrect: false,
+        emoji: "🥞",
+      },
+    ],
+  },
+  {
+    id: 3,
+    questionNumberText: "السؤال الثالث",
+    title: "لماذا سمي المقشوش بهذا الإسم؟",
+    slogan: "الكرم .. من طبعنا",
+    options: [
+      {
+        id: "q3-1",
+        text: "لأنه يُقش من الصاج",
+        isCorrect: true,
+        emoji: "🍳",
+      },
+      {
+        id: "q3-2",
+        text: "لأنه يُؤكل بالقاشوش",
+        isCorrect: false,
+        emoji: "🥄",
+      },
+      {
+        id: "q3-3",
+        text: "نسبةً إلى نوع من التمر",
+        isCorrect: false,
+        emoji: "🌴",
+      },
+      {
+        id: "q3-4",
+        text: "نسبةً إلى منطقة حائل",
+        isCorrect: false,
+        emoji: "⛰️",
+      },
+    ],
+  },
+];
+
+export const PRIZE_POOL: Prize[] = [
+  {
+    id: "mini-maqshoosh",
+    title: "مقشوش ميني طازج",
+    badge: "هدية اليوم الوطني",
+    description: "صحن مقشوش ميني ساخن بالسمن والعسل البلدي مجاناً مع طلبك!",
+    terms: "يتم استلام الجائزة مع الطلب داخل الفرع",
+    weight: 28,
+    icon: "🥞",
+  },
+  {
+    id: "free-coffee",
+    title: "قهوة سعودية أصيلة",
+    badge: "ضيافة رغفان",
+    description: "كوب قهوة سعودية ملكية بالهيل والزعفران الشقر مجاناً مع طلبك!",
+    terms: "صالحة للاستخدام المباشر مع طلبك داخل الفرع",
+    weight: 24,
+    icon: "☕",
+  },
+  {
+    id: "discount-15",
+    title: "خصم 15% على فاتورتك",
+    badge: "عرض حصري",
+    description: "خصم 15% فوري على إجمالي طلبك داخل فرع رغفان!",
+    terms: "تطبق عند الطلب المباشر من الكاشير",
+    weight: 22,
+    icon: "🏷️",
+  },
+  {
+    id: "credit-95",
+    title: "خصم 9.6 ريال على طلبك",
+    badge: "احتفال اليوم الوطني",
+    description: "خصم 9.6 ريال فورية احتفالاً باليوم الوطني على طلبك القادم!",
+    terms: "صالحة للاستخدام لمرة واحدة بالفرع لطلبك اليوم",
+    weight: 14,
+    icon: "🇸🇦",
+  },
+  {
+    id: "free-topping",
+    title: "إضافة سمن وعسل بلدي فاخر",
+    badge: "إضافة مجانية",
+    description: "إضافة سمن غنم بلدي وعسل سدر أصيل مجاناً على أي صحن من اختيارك!",
+    terms: "صالحة مع أي طلب بالفرع لمرة واحدة",
+    weight: 10,
+    icon: "🍯",
+  },
+  {
+    id: "grand-box",
+    title: "بوكس رغفان الملكي للجمعات",
+    badge: "الجائزة الذهبية الكبرى 👑",
+    description: "ألف مبروك! فزت ببوكس الجمعات الملكي المشكل الفاخر مجاناً بالكامل!",
+    terms: "تواصل مع مدير الفرع مع إبراز الكود للاستلام الفوري ومشاركة الفرحة",
+    weight: 2,
+    icon: "👑",
+    isRare: true,
+  },
+];
+
+export interface ScoreFeedback {
+  percentage: number;
+  title: string;
+  subtitle: string;
+  description: string;
+  badge: string;
+  audioTone?: "celebrate" | "cheer" | "gentle";
+}
+
+export function getScoreFeedback(correctCount: number, total: number = 3): ScoreFeedback {
+  const percentage = Math.round((correctCount / total) * 100);
+
+  if (percentage >= 90) {
+    return {
+      percentage: 100,
+      title: "سعوديتك 100%",
+      subtitle: "علومك غانمة وفالك الطيب!",
+      description: "ما شاء الله تبارك الله! سعودي أصيل أباً عن جد، خبير في تراثنا وأكلاتنا الشعبية.. كفو والله وراسك مرفوع!",
+      badge: "سعودي أصيل 100%",
+      audioTone: "celebrate",
+    };
+  } else if (percentage >= 50) {
+    return {
+      percentage: 67,
+      title: "سعوديتك 67%",
+      subtitle: "واضح تحتاج لك كم زيارة لرغفان! 😂",
+      description: "ما قصرت وعلومك طيبة! بس يبيلك تتردد على رغفان شوي وتضبط الجرعة مع مقشوش ومصابيب على أصولها!",
+      badge: "سعودي على الطريق",
+      audioTone: "cheer",
+    };
+  } else {
+    return {
+      percentage: 33,
+      title: "سعوديتك 33%",
+      subtitle: "يبيلك كورس مصابيب ومقشوش على أصوله! 😉",
+      description: "ولا يهمك! كل نتيجة اليوم فيها هدية مضمونة من رغفان.. مرّنا بالفرع وتذوق أصالة الأجداد بنفسك!",
+      badge: "ضيف رغفان العزيز",
+      audioTone: "gentle",
+    };
+  }
+}
+
+// Function to draw a weighted prize
+export function drawPrize(pool: Prize[] = PRIZE_POOL): Prize {
+  const totalWeight = pool.reduce((acc, p) => acc + p.weight, 0);
+  let random = Math.random() * totalWeight;
+
+  for (const prize of pool) {
+    if (random < prize.weight) {
+      return prize;
+    }
+    random -= prize.weight;
+  }
+  return pool[0];
+}
+
+// Generate unique promo code
+export function generatePromoCode(prize: Prize): string {
+  const prefix = prize.isRare ? "RUGHFAN-VIP" : "RUGHFAN-95";
+  const randomSuffix = Math.random().toString(36).substring(2, 6).toUpperCase();
+  return `${prefix}-${randomSuffix}`;
+}
+
+export interface UserSavedSession {
+  customerName: string;
+  orderNumber: string;
+  prize: Prize;
+  promoCode: string;
+  scorePercentage: number;
+  correctCount: number;
+  completedAt: string;
+}
