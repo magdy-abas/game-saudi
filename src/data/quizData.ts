@@ -144,7 +144,7 @@ export const PRIZE_POOL: Prize[] = [
     badge: "هدية اليوم الوطني",
     description: "صحن مقشوش ميني ساخن بالسمن والعسل البلدي مجاناً مع طلبك!",
     terms: "يتم استلام الجائزة مع الطلب داخل الفرع",
-    weight: 28,
+    weight: 35,
     image: "/assets/food_maqshoosh.jpg",
   },
   {
@@ -153,7 +153,7 @@ export const PRIZE_POOL: Prize[] = [
     badge: "ضيافة رغفان الملكية",
     description: "فنجال قهوة سعودية ملكية بالهيل والزعفران الشقر مجاناً مع طلبك!",
     terms: "صالحة للاستخدام المباشر مع طلبك داخل الفرع",
-    weight: 24,
+    weight: 30,
     image: "/assets/food_coffee.jpg",
   },
   {
@@ -162,7 +162,7 @@ export const PRIZE_POOL: Prize[] = [
     badge: "عرض حصري",
     description: "خصم 15% فوري على إجمالي طلبك داخل فرع رغفان!",
     terms: "تطبق عند الطلب المباشر من الكاشير",
-    weight: 22,
+    weight: 20,
     image: "/assets/food_masabeeb.jpg",
   },
   {
@@ -171,27 +171,8 @@ export const PRIZE_POOL: Prize[] = [
     badge: "احتفال اليوم الوطني",
     description: "خصم 9.6 ريال فورية احتفالاً باليوم الوطني 96 على طلبك القادم!",
     terms: "صالحة للاستخدام لمرة واحدة بالفرع لطلبك اليوم",
-    weight: 14,
+    weight: 15,
     image: "/assets/food_maqshoosh.jpg",
-  },
-  {
-    id: "free-topping",
-    title: "إضافة سمن وعسل بلدي فاخر",
-    badge: "إضافة مجانية",
-    description: "إضافة سمن غنم بلدي وعسل سدر أصيل مجاناً على أي صحن من اختيارك!",
-    terms: "صالحة مع أي طلب بالفرع لمرة واحدة",
-    weight: 10,
-    image: "/assets/food_masabeeb.jpg",
-  },
-  {
-    id: "grand-box",
-    title: "صندوق رغفان الملكي للجمعات",
-    badge: "الجائزة الذهبية الكبرى 👑",
-    description: "ألف مبروك! فزت بصندوق رغفان الملكي المشكل الفاخر مجاناً بالكامل!",
-    terms: "تواصل مع مدير الفرع مع إبراز الكود للاستلام الفوري ومشاركة الفرحة",
-    weight: 2,
-    image: "/assets/box_luxury.jpg",
-    isRare: true,
   },
 ];
 
