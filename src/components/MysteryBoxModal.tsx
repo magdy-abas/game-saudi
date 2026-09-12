@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Sparkles } from "lucide-react";
+import { Sparkles, Gift } from "lucide-react";
 import { soundManager } from "../utils/soundEffects";
 import confetti from "canvas-confetti";
 
@@ -23,20 +23,20 @@ export const MysteryBoxModal: React.FC<MysteryBoxModalProps> = ({
 
     // Multistage Confetti explosion
     const end = Date.now() + 1200;
-    const colors = ["#C58D38", "#14613B", "#DFB06C", "#FFFFFF", "#F5D485"];
+    const colors = ["#C58D38", "#125433", "#DFB06C", "#FFFFFF", "#F5D485"];
 
     (function frame() {
       confetti({
-        particleCount: 5,
+        particleCount: 6,
         angle: 60,
-        spread: 55,
+        spread: 60,
         origin: { x: 0 },
         colors: colors,
       });
       confetti({
-        particleCount: 5,
+        particleCount: 6,
         angle: 120,
-        spread: 55,
+        spread: 60,
         origin: { x: 1 },
         colors: colors,
       });
@@ -53,121 +53,57 @@ export const MysteryBoxModal: React.FC<MysteryBoxModalProps> = ({
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-md animate-fadeIn">
-      <div className="relative w-full max-w-sm bg-gradient-to-b from-[#0F4C2E] via-[#09321E] to-[#041A0F] border-2 border-[#C58D38] rounded-3xl p-6 text-center shadow-2xl overflow-hidden flex flex-col items-center">
-        {/* Background Radial Glow */}
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,#DFB06C_0%,transparent_70%)] opacity-15 pointer-events-none" />
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/90 backdrop-blur-md animate-fadeIn font-almarai">
+      <div className="relative w-full max-w-sm bg-gradient-to-b from-[#082416] via-[#0D3E25] to-[#04160C] border-2 border-[#C58D38] rounded-3xl p-5 text-center shadow-2xl overflow-hidden flex flex-col items-center">
+        {/* Ambient Warm Golden Glow */}
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,#DFB06C_0%,transparent_70%)] opacity-20 pointer-events-none" />
 
-        {/* Modal Header */}
-        <div className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-[#185E3B] border border-[#C58D38]/40 text-[#DFB06C] text-xs font-bold mb-4 shadow-sm">
-          <Sparkles className="w-3.5 h-3.5" />
+        {/* Modal Header Badge */}
+        <div className="inline-flex items-center gap-1.5 px-4 py-1 rounded-full bg-[#125433] border border-[#C58D38]/50 text-[#DFB06C] text-xs font-bold mb-3 shadow-md">
+          <Sparkles className="w-3.5 h-3.5 text-[#E6B366]" />
           <span>صندوق الحظ من رغفان</span>
-          <Sparkles className="w-3.5 h-3.5" />
+          <Sparkles className="w-3.5 h-3.5 text-[#E6B366]" />
         </div>
 
-        <h3 className="text-2xl font-extrabold text-white font-tajawal mb-1">
-          هدية مشاركتك جاهزة!
+        <h3 className="text-2xl font-black text-white mb-1 tracking-tight">
+          هديتك الفورية جاهزة!
         </h3>
-        <p className="text-xs text-emerald-200 mb-6">
-          انقر على الصندوق لكشف هديتك الفورية الخاصة بك
+        <p className="text-xs text-emerald-200/90 mb-4 font-medium">
+          المكافأة مضمونة للجميع.. انقر لفتح الصندوق
         </p>
 
-        {/* Interactive 3D Gift Box Visual */}
+        {/* Realistic Saudi Royal Chest Image */}
         <div
           onClick={handleOpenBox}
-          className={`relative cursor-pointer my-4 transform transition-all duration-300 ${
+          className={`relative cursor-pointer my-2 rounded-2xl overflow-hidden border-2 border-[#C58D38] shadow-[0_15px_35px_rgba(0,0,0,0.7)] transform transition-all duration-500 ${
             isOpening
-              ? "scale-110 rotate-3 filter brightness-125"
-              : "hover:scale-105 animate-bounceSoft"
+              ? "scale-105 filter brightness-125 shadow-[0_0_40px_rgba(230,179,102,0.8)]"
+              : "hover:scale-[1.02] active:scale-[0.98]"
           }`}
         >
-          {/* Glowing Aura behind box */}
-          <div className="absolute -inset-4 bg-[#C58D38]/30 rounded-full blur-xl animate-pulse" />
-
-          {/* SVG Gift Box with Ribbon & Saudi Palm Ornament */}
-          <svg
-            width="160"
-            height="160"
-            viewBox="0 0 160 160"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-            className="drop-shadow-[0_15px_25px_rgba(0,0,0,0.6)]"
-          >
-            {/* Box Body */}
-            <rect x="25" y="65" width="110" height="80" rx="12" fill="#0D462A" stroke="#C58D38" strokeWidth="2.5" />
-            <rect x="27" y="67" width="106" height="76" rx="10" fill="url(#boxInnerGrad)" opacity="0.6" />
-
-            {/* Vertical Golden Ribbon */}
-            <rect x="70" y="65" width="20" height="80" fill="url(#goldRibbon)" stroke="#C58D38" strokeWidth="1" />
-
-            {/* Box Lid */}
-            <rect
-              x="18"
-              y={isOpening ? "30" : "50"}
-              width="124"
-              height="24"
-              rx="8"
-              fill="#145A36"
-              stroke="#E6B366"
-              strokeWidth="2.5"
-              className="transition-all duration-500"
+          <div className="w-64 h-56 relative bg-black">
+            <img
+              src="/assets/box_luxury.jpg"
+              alt="صندوق هدايا رغفان الفاخر"
+              className="w-full h-full object-cover object-center"
             />
-            {/* Lid Vertical Ribbon */}
-            <rect
-              x="70"
-              y={isOpening ? "30" : "50"}
-              width="20"
-              height="24"
-              fill="url(#goldRibbon)"
-              className="transition-all duration-500"
-            />
-
-            {/* Ribbon Bow on top */}
-            <g
-              transform={isOpening ? "translate(0, -25)" : "translate(0, 0)"}
-              className="transition-all duration-500"
-            >
-              {/* Left Bow Loop */}
-              <path
-                d="M80 50 C55 30 50 15 68 22 C80 27 80 48 80 50 Z"
-                fill="url(#goldRibbon)"
-                stroke="#C58D38"
-                strokeWidth="1.5"
-              />
-              {/* Right Bow Loop */}
-              <path
-                d="M80 50 C105 30 110 15 92 22 C80 27 80 48 80 50 Z"
-                fill="url(#goldRibbon)"
-                stroke="#C58D38"
-                strokeWidth="1.5"
-              />
-              {/* Bow Center Gem with Palm motif */}
-              <circle cx="80" cy="46" r="7" fill="#E6B366" stroke="#9A6B22" strokeWidth="1.5" />
-            </g>
-
-            {/* Gradients */}
-            <defs>
-              <linearGradient id="goldRibbon" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stopColor="#FFF1D0" />
-                <stop offset="45%" stopColor="#DFB06C" />
-                <stop offset="100%" stopColor="#9A6B22" />
-              </linearGradient>
-              <linearGradient id="boxInnerGrad" x1="0%" y1="0%" x2="0%" y2="100%">
-                <stop offset="0%" stopColor="#1E7A4C" />
-                <stop offset="100%" stopColor="#082A19" />
-              </linearGradient>
-            </defs>
-          </svg>
+            {/* Pulsing Light Overlay */}
+            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none" />
+            <div className="absolute bottom-2 inset-x-0 flex items-center justify-center gap-1.5 text-xs font-black text-[#DFB06C] drop-shadow-md">
+              <Gift className="w-4 h-4 text-[#E6B366] animate-bounce" />
+              <span>انقر لفتح الصندوق 🎁</span>
+            </div>
+          </div>
         </div>
 
         {/* Action Button */}
         <button
           onClick={handleOpenBox}
           disabled={isOpening}
-          className="mt-4 w-full py-3.5 px-6 rounded-2xl bg-gradient-to-r from-[#DFB06C] via-[#C58D38] to-[#9E6A1C] text-[#221504] font-bold text-base shadow-lg hover:from-[#E6B366] hover:to-[#B27924] transition-all flex items-center justify-center gap-2"
+          className="mt-4 w-full py-3.5 px-6 rounded-2xl bg-gradient-to-r from-[#DFB06C] via-[#C58D38] to-[#A36E20] hover:from-[#E6B366] hover:to-[#B57C26] text-[#2B1B06] font-black text-base shadow-lg transition-all flex items-center justify-center gap-2 cursor-pointer active:scale-[0.98]"
         >
-          <Sparkles className="w-5 h-5 text-[#221504]" />
-          <span>{isOpening ? "جاري كشف الهدية..." : "اضغط لفتح الصندوق!"}</span>
+          <Sparkles className="w-5 h-5 text-[#2B1B06]" />
+          <span>{isOpening ? "جاري كشف الهدية..." : "افتح حظك الآن"}</span>
         </button>
       </div>
     </div>

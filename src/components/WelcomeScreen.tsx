@@ -29,10 +29,10 @@ export const WelcomeScreen: React.FC<WelcomeScreenProps> = ({ onStart }) => {
     <div className="flex flex-col min-h-full justify-between pb-4 px-5 animate-fadeIn">
       {/* Top Section */}
       <div className="flex flex-col items-center">
-        {/* Saudi National Day 95 Badge */}
+        {/* Saudi National Day 96 Badge */}
         <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#125332]/50 border border-[#C58D38]/40 text-[#DFB06C] text-xs font-semibold mb-3 shadow-sm backdrop-blur-sm">
           <SaudiFlag size="sm" />
-          <span>اليوم الوطني السعودي 95</span>
+          <span>اليوم الوطني السعودي 96</span>
           <span className="opacity-40">•</span>
           <span className="text-[11px] font-normal text-emerald-200">فخر .. جذور .. واثقة</span>
         </div>

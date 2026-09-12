@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import type { Prize } from "../data/quizData";
-import { Copy, Check, Share2, Download, QrCode, User, Receipt, ShieldCheck } from "lucide-react";
+import { Copy, Check, Share2, Download, QrCode, User, Receipt, ShieldCheck, RotateCcw } from "lucide-react";
 import { soundManager } from "../utils/soundEffects";
 import QRCode from "qrcode";
 
@@ -12,6 +12,7 @@ interface PrizeScreenProps {
   orderNumber?: string;
   isExistingSession?: boolean;
   onOpenStoryCard: () => void;
+  onPlayAgain?: () => void;
 }
 
 export const PrizeScreen: React.FC<PrizeScreenProps> = ({
@@ -22,6 +23,7 @@ export const PrizeScreen: React.FC<PrizeScreenProps> = ({
   orderNumber = "",
   isExistingSession = false,
   onOpenStoryCard,
+  onPlayAgain,
 }) => {
   const [copied, setCopied] = useState(false);
   const [qrDataUrl, setQrDataUrl] = useState<string>("");
@@ -75,9 +77,9 @@ export const PrizeScreen: React.FC<PrizeScreenProps> = ({
       <div className="flex flex-col items-center">
         {/* Existing device session banner */}
         {isExistingSession && (
-          <div className="w-full bg-[#124B2C]/90 border border-[#C58D38]/50 rounded-xl py-1.5 px-3 mb-2 flex items-center justify-center gap-1.5 text-xs text-[#E6B366] shadow">
-            <ShieldCheck className="w-4 h-4 text-[#22C55E]" />
-            <span>هديتك محفوظة لهذا الجهاز ومتاحة للاستلام 🎁</span>
+          <div className="w-full bg-[#124B2C]/90 border border-[#C58D38]/50 rounded-xl py-2 px-3.5 mb-2 flex items-center justify-center gap-2 text-xs font-semibold text-[#E6B366] shadow-md">
+            <ShieldCheck className="w-4 h-4 text-[#22C55E] shrink-0" />
+            <span>هديتك محفوظة ومتاحة لك للاستلام 🎁</span>
           </div>
         )}
 
@@ -94,15 +96,30 @@ export const PrizeScreen: React.FC<PrizeScreenProps> = ({
 
         {/* Prize Card */}
         <div className="w-full bg-[#FAF7F0] border-2 border-[#E3D7C1] rounded-3xl p-4 sm:p-5 shadow-xl text-center relative overflow-hidden mt-1">
-          {/* Visual Showcase Box */}
-          <div className="w-full h-32 rounded-2xl bg-gradient-to-b from-[#EFE8DA] to-[#DFD3BE] border border-[#D5C6AC] flex flex-col items-center justify-center relative overflow-hidden shadow-inner mb-2.5">
-            <div className="text-5xl drop-shadow-md transform hover:scale-110 transition-transform duration-300">
-              {prize.icon}
+          {/* Visual Showcase Box with Enlarged Real Dish Photo */}
+          <div className="w-full h-48 sm:h-56 rounded-2xl border-2 border-[#C58D38]/60 overflow-hidden relative shadow-lg mb-3 bg-black group">
+            <img
+              src={prize.image || "/assets/food_maqshoosh.jpg"}
+              alt={prize.title}
+              className="w-full h-full object-cover object-center transform group-hover:scale-105 transition-transform duration-500"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none" />
+
+            {/* Prominent RUGHFAN Brand Stamp */}
+            <div className="absolute top-2.5 right-2.5 flex items-center gap-1.5 bg-[#0F3823]/90 backdrop-blur-md px-3 py-1 rounded-full border border-[#C58D38]/70 shadow-lg">
+              <img
+                src="/assets/logo.png"
+                alt="رغفان"
+                className="w-5 h-5 rounded-full object-contain bg-[#FAF7F0] p-0.5"
+              />
+              <span className="text-[11px] font-bold text-[#E6B366] font-tajawal">
+                مطاعم رغفان
+              </span>
             </div>
 
             {prize.isRare && (
-              <div className="absolute top-2 right-2 bg-gradient-to-r from-amber-500 to-yellow-400 text-black text-[10px] font-black px-2 py-0.5 rounded-full shadow">
-                جائزة كبرى 👑
+              <div className="absolute top-2.5 left-2.5 bg-gradient-to-r from-amber-500 to-yellow-400 text-black text-[10px] font-black px-2.5 py-1 rounded-full shadow-md">
+                جائزة ذهبية كبرى 👑
               </div>
             )}
           </div>
@@ -202,6 +219,19 @@ export const PrizeScreen: React.FC<PrizeScreenProps> = ({
           <Download className="w-4 h-4 text-[#C58D38]" />
           <span>حفظ كرت الستوري 📥</span>
         </button>
+
+        {onPlayAgain && (
+          <button
+            onClick={() => {
+              soundManager.playClick();
+              onPlayAgain();
+            }}
+            className="w-full py-2.5 px-4 rounded-2xl bg-[#092B19]/80 hover:bg-[#092B19] border border-[#C58D38]/50 text-[#E6B366] font-bold text-xs flex items-center justify-center gap-2 transition-all active:scale-[0.98] cursor-pointer shadow"
+          >
+            <RotateCcw className="w-3.5 h-3.5 text-[#E6B366]" />
+            <span>تجربة محاولة جديدة (إعادة الاختبار) 🔄</span>
+          </button>
+        )}
 
         {/* Notice */}
         <div className="text-center pt-0.5">

@@ -11,7 +11,9 @@ export const HeritageIllustration: React.FC<HeritageIllustrationProps> = ({
 }) => {
   if (variant === "subtle") {
     return (
-      <div className={`relative w-full overflow-hidden opacity-25 pointer-events-none select-none ${className}`}>
+      <div
+        className={`relative w-full overflow-hidden opacity-25 pointer-events-none select-none ${className}`}
+      >
         <svg viewBox="0 0 400 60" className="w-full h-auto fill-[#C58D38]">
           <path d="M0 60 L20 40 L40 60 L60 40 L80 60 L100 40 L120 60 L140 40 L160 60 L180 40 L200 60 L220 40 L240 60 L260 40 L280 60 L300 40 L320 60 L340 40 L360 60 L380 40 L400 60 Z" />
         </svg>
@@ -20,9 +22,11 @@ export const HeritageIllustration: React.FC<HeritageIllustrationProps> = ({
   }
 
   return (
-    <div className={`relative w-full overflow-hidden select-none group ${className}`}>
+    <div
+      className={`relative w-full overflow-hidden select-none group ${className}`}
+    >
       {/* Real Cinematic Saudi Heritage Fortress with Waving Flag & Glowing Rughfan Logo */}
-      <div className="relative w-full h-44 sm:h-52 overflow-hidden">
+      <div className="relative w-full h-55 sm:h-52 overflow-hidden">
         <img
           src="/assets/hero_fortress.jpg"
           alt="قصر المصمك والعلم السعودي - رغفان"

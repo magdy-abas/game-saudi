@@ -91,13 +91,13 @@ export const StoryCardModal: React.FC<StoryCardModalProps> = ({
             {/* National Day Pill */}
             <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#165A37]/80 border border-[#C58D38]/40 text-[#DFB06C] text-[11px] font-bold mb-2 shadow">
               <SaudiFlag size="sm" />
-              <span>اليوم الوطني السعودي 95</span>
+              <span>اليوم الوطني السعودي 96</span>
               <span className="opacity-50">•</span>
               <span>فخر .. جذور .. واثقة</span>
             </div>
 
             {/* Brand Logo */}
-            <BrandLogo variant="light" size="sm" />
+            <BrandLogo variant="light" size="md" />
           </div>
 
           {/* Centerpiece: Masmak, Gauge & Score */}
@@ -124,10 +124,12 @@ export const StoryCardModal: React.FC<StoryCardModalProps> = ({
 
             {/* Won Prize mention if available */}
             {prize && (
-              <div className="mt-3 px-3 py-1.5 rounded-xl bg-[#092B19]/90 border border-[#C58D38]/40 inline-flex items-center gap-1.5 text-xs text-white">
+              <div className="mt-3 px-4 py-2 rounded-xl bg-[#092B19]/90 border border-[#C58D38]/40 inline-flex items-center gap-2.5 text-xs text-white shadow-md">
+                {prize.image && (
+                  <img src={prize.image} alt="" className="w-7 h-7 rounded-lg object-cover border border-[#DFB06C] shadow" />
+                )}
                 <span>هدية رغفان:</span>
                 <span className="font-bold text-[#DFB06C]">{prize.title}</span>
-                <span>{prize.icon}</span>
               </div>
             )}
           </div>

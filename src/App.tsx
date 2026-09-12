@@ -20,6 +20,11 @@ import { soundManager } from "./utils/soundEffects";
 type ScreenState = "welcome" | "question" | "result" | "prize";
 const STORAGE_KEY = "rughfan_quiz_session_v1";
 
+// ⚠️ مفتاح تفعيل/تعطيل حفظ الجلسة في localStorage:
+// مضبوط حالياً على false لتسهيل إجراء الفحوصات والتجارب المتكررة
+// عند الانتهاء من التست، يتم تحويله إلى true لتفعيل قفل المحاولة الواحدة لكل جهاز
+export const ENABLE_LOCAL_STORAGE_LOCK = false;
+
 export function App() {
   const urlParams = useMemo(() => new URLSearchParams(window.location.search), []);
   const initialScreen = (urlParams.get("screen") as ScreenState) || "welcome";
@@ -30,7 +35,9 @@ export function App() {
   const [orderNumber, setOrderNumber] = useState<string>(urlParams.get("order") || "104");
   const [questionIndex, setQuestionIndex] = useState<number>(0);
   const [selectedAnswers, setSelectedAnswers] = useState<QuizOption[]>([]);
-  const [isExistingSession, setIsExistingSession] = useState<boolean>(false);
+  const [isExistingSession, setIsExistingSession] = useState<boolean>(
+    () => urlParams.get("existing") === "1"
+  );
 
   // Sound State
   const [isMuted, setIsMuted] = useState<boolean>(soundManager.isMuted);
@@ -44,8 +51,18 @@ export function App() {
   const [promoCode, setPromoCode] = useState<string>(() => generatePromoCode(drawnPrize));
   const [savedScorePercentage, setSavedScorePercentage] = useState<number>(100);
 
-  // Check LocalStorage on initial load (One attempt per device rule)
+  // Check LocalStorage on initial load (Disabled while testing mode is active)
   useEffect(() => {
+    if (!ENABLE_LOCAL_STORAGE_LOCK) {
+      // وضع التجربة: حذف أي جلسة محفوظة سابقة لضمان بدء محاولة جديدة كل مرة
+      try {
+        localStorage.removeItem(STORAGE_KEY);
+      } catch {
+        // ignore
+      }
+      return;
+    }
+
     try {
       const existingData = localStorage.getItem(STORAGE_KEY);
       if (existingData) {
@@ -107,24 +124,35 @@ export function App() {
       setPromoCode(finalCode);
       setSavedScorePercentage(calculatedScore);
 
-      // Lock session to device (One attempt per device)
-      const sessionData: UserSavedSession = {
-        customerName: customerName,
-        orderNumber: orderNumber,
-        prize: finalPrize,
-        promoCode: finalCode,
-        scorePercentage: calculatedScore,
-        correctCount: updatedAnswers.filter((a) => a.isCorrect).length,
-        completedAt: new Date().toISOString(),
-      };
-      try {
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(sessionData));
-      } catch {
-        // Storage fallback
+      // Lock session to device (One attempt per device - active only when ENABLE_LOCAL_STORAGE_LOCK is true)
+      if (ENABLE_LOCAL_STORAGE_LOCK) {
+        const sessionData: UserSavedSession = {
+          customerName: customerName,
+          orderNumber: orderNumber,
+          prize: finalPrize,
+          promoCode: finalCode,
+          scorePercentage: calculatedScore,
+          correctCount: updatedAnswers.filter((a) => a.isCorrect).length,
+          completedAt: new Date().toISOString(),
+        };
+        try {
+          localStorage.setItem(STORAGE_KEY, JSON.stringify(sessionData));
+        } catch {
+          // Storage fallback
+        }
       }
 
       setScreen("result");
     }
+  };
+
+  const handlePlayAgain = () => {
+    setQuestionIndex(0);
+    setSelectedAnswers([]);
+    setCustomerName("");
+    setOrderNumber("");
+    setIsExistingSession(false);
+    setScreen("welcome");
   };
 
   const handleBack = () => {
@@ -148,7 +176,7 @@ export function App() {
   };
 
   return (
-    <main className="min-h-screen bg-[#0A100C] py-0 sm:py-6 flex flex-col items-center justify-center font-readex relative overflow-x-hidden">
+    <main className="min-h-screen bg-[#0A100C] py-0 sm:py-6 flex flex-col items-center justify-center font-almarai relative overflow-x-hidden">
       {/* Ambience Glow */}
       <div className="fixed -top-40 -left-40 w-96 h-96 bg-[#14613B]/20 rounded-full blur-3xl pointer-events-none" />
       <div className="fixed -bottom-40 -right-40 w-96 h-96 bg-[#C58D38]/15 rounded-full blur-3xl pointer-events-none" />

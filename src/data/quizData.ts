@@ -2,8 +2,8 @@ export interface QuizOption {
   id: string;
   text: string;
   isCorrect: boolean;
-  emoji?: string;
-  note?: string;
+  image?: string;
+  subtitle?: string;
 }
 
 export interface Question {
@@ -20,12 +20,12 @@ export interface Prize {
   badge: string;
   description: string;
   terms: string;
-  weight: number; // probability weight
-  icon: string;
+  weight: number;
+  image: string;
   isRare?: boolean;
 }
 
-// 3 Fixed Questions Requested by User
+// 3 Fixed Questions with Real Food Photography
 export const FIXED_QUESTIONS: Question[] = [
   {
     id: 1,
@@ -36,26 +36,30 @@ export const FIXED_QUESTIONS: Question[] = [
       {
         id: "q1-1",
         text: "المصابيب",
+        subtitle: "أقراص عسل وسمن بلدي",
         isCorrect: false,
-        emoji: "🫓",
+        image: "/assets/food_masabeeb.jpg",
       },
       {
         id: "q1-2",
         text: "المرقوق",
+        subtitle: "مرق اللحم والخضار التراثي",
         isCorrect: false,
-        emoji: "🍲",
+        image: "/assets/food_margoog.jpg",
       },
       {
         id: "q1-3",
         text: "الجريش",
+        subtitle: "قمح مهروس مع كشنة وسمن",
         isCorrect: false,
-        emoji: "🥣",
+        image: "/assets/food_jareesh.jpg",
       },
       {
         id: "q1-4",
         text: "المقشوش",
+        subtitle: "حلوى رغفان الوطنية الذهبية",
         isCorrect: true,
-        emoji: "🥞",
+        image: "/assets/food_maqshoosh.jpg",
       },
     ],
   },
@@ -68,26 +72,30 @@ export const FIXED_QUESTIONS: Question[] = [
       {
         id: "q2-1",
         text: "الكليجا",
+        subtitle: "فخر القصيم بالتمر والهيل",
         isCorrect: false,
-        emoji: "🍪",
+        image: "/assets/food_kleeja.jpg",
       },
       {
         id: "q2-2",
         text: "المقشوش",
+        subtitle: "الحلوى الوطنية السعودية الرسمية",
         isCorrect: true,
-        emoji: "🥞",
+        image: "/assets/food_maqshoosh.jpg",
       },
       {
         id: "q2-3",
         text: "العصيدة",
+        subtitle: "دبس التمر والزبدة الفاخرة",
         isCorrect: false,
-        emoji: "🍯",
+        image: "/assets/food_aseeda.jpg",
       },
       {
         id: "q2-4",
         text: "مصابيب العسل",
+        subtitle: "مخبوزات الصاج التراثية",
         isCorrect: false,
-        emoji: "🥞",
+        image: "/assets/food_masabeeb.jpg",
       },
     ],
   },
@@ -100,26 +108,30 @@ export const FIXED_QUESTIONS: Question[] = [
       {
         id: "q3-1",
         text: "لأنه يُقش من الصاج",
+        subtitle: "يُقش برفق بعد تحميره الذهبي",
         isCorrect: true,
-        emoji: "🍳",
+        image: "/assets/food_saj.jpg",
       },
       {
         id: "q3-2",
         text: "لأنه يُؤكل بالقاشوش",
+        subtitle: "أداة تناول تراثية قديمة",
         isCorrect: false,
-        emoji: "🥄",
+        image: "/assets/food_maqshoosh.jpg",
       },
       {
         id: "q3-3",
         text: "نسبةً إلى نوع من التمر",
+        subtitle: "أصناف نخيل الجزيرة العربية",
         isCorrect: false,
-        emoji: "🌴",
+        image: "/assets/food_kleeja.jpg",
       },
       {
         id: "q3-4",
         text: "نسبةً إلى منطقة حائل",
+        subtitle: "من عروس الشمال وجبال أجا",
         isCorrect: false,
-        emoji: "⛰️",
+        image: "/assets/hero_fortress.jpg",
       },
     ],
   },
@@ -133,16 +145,16 @@ export const PRIZE_POOL: Prize[] = [
     description: "صحن مقشوش ميني ساخن بالسمن والعسل البلدي مجاناً مع طلبك!",
     terms: "يتم استلام الجائزة مع الطلب داخل الفرع",
     weight: 28,
-    icon: "🥞",
+    image: "/assets/food_maqshoosh.jpg",
   },
   {
     id: "free-coffee",
     title: "قهوة سعودية أصيلة",
-    badge: "ضيافة رغفان",
-    description: "كوب قهوة سعودية ملكية بالهيل والزعفران الشقر مجاناً مع طلبك!",
+    badge: "ضيافة رغفان الملكية",
+    description: "فنجال قهوة سعودية ملكية بالهيل والزعفران الشقر مجاناً مع طلبك!",
     terms: "صالحة للاستخدام المباشر مع طلبك داخل الفرع",
     weight: 24,
-    icon: "☕",
+    image: "/assets/food_coffee.jpg",
   },
   {
     id: "discount-15",
@@ -151,16 +163,16 @@ export const PRIZE_POOL: Prize[] = [
     description: "خصم 15% فوري على إجمالي طلبك داخل فرع رغفان!",
     terms: "تطبق عند الطلب المباشر من الكاشير",
     weight: 22,
-    icon: "🏷️",
+    image: "/assets/food_masabeeb.jpg",
   },
   {
-    id: "credit-95",
+    id: "credit-96",
     title: "خصم 9.6 ريال على طلبك",
     badge: "احتفال اليوم الوطني",
-    description: "خصم 9.6 ريال فورية احتفالاً باليوم الوطني على طلبك القادم!",
+    description: "خصم 9.6 ريال فورية احتفالاً باليوم الوطني 96 على طلبك القادم!",
     terms: "صالحة للاستخدام لمرة واحدة بالفرع لطلبك اليوم",
     weight: 14,
-    icon: "🇸🇦",
+    image: "/assets/food_maqshoosh.jpg",
   },
   {
     id: "free-topping",
@@ -169,16 +181,16 @@ export const PRIZE_POOL: Prize[] = [
     description: "إضافة سمن غنم بلدي وعسل سدر أصيل مجاناً على أي صحن من اختيارك!",
     terms: "صالحة مع أي طلب بالفرع لمرة واحدة",
     weight: 10,
-    icon: "🍯",
+    image: "/assets/food_masabeeb.jpg",
   },
   {
     id: "grand-box",
-    title: "بوكس رغفان الملكي للجمعات",
+    title: "صندوق رغفان الملكي للجمعات",
     badge: "الجائزة الذهبية الكبرى 👑",
-    description: "ألف مبروك! فزت ببوكس الجمعات الملكي المشكل الفاخر مجاناً بالكامل!",
+    description: "ألف مبروك! فزت بصندوق رغفان الملكي المشكل الفاخر مجاناً بالكامل!",
     terms: "تواصل مع مدير الفرع مع إبراز الكود للاستلام الفوري ومشاركة الفرحة",
     weight: 2,
-    icon: "👑",
+    image: "/assets/box_luxury.jpg",
     isRare: true,
   },
 ];
@@ -189,7 +201,6 @@ export interface ScoreFeedback {
   subtitle: string;
   description: string;
   badge: string;
-  audioTone?: "celebrate" | "cheer" | "gentle";
 }
 
 export function getScoreFeedback(correctCount: number, total: number = 3): ScoreFeedback {
@@ -200,32 +211,29 @@ export function getScoreFeedback(correctCount: number, total: number = 3): Score
       percentage: 100,
       title: "سعوديتك 100%",
       subtitle: "علومك غانمة وفالك الطيب!",
-      description: "ما شاء الله تبارك الله! سعودي أصيل أباً عن جد، خبير في تراثنا وأكلاتنا الشعبية.. كفو والله وراسك مرفوع!",
+      description: "ما شاء الله تبارك الله! خبير في أكلاتنا الشعبية وتراثنا العريق.. سعودي أصيل أباً عن جد وكفو والله!",
       badge: "سعودي أصيل 100%",
-      audioTone: "celebrate",
     };
   } else if (percentage >= 50) {
     return {
       percentage: 67,
       title: "سعوديتك 67%",
       subtitle: "واضح تحتاج لك كم زيارة لرغفان! 😂",
-      description: "ما قصرت وعلومك طيبة! بس يبيلك تتردد على رغفان شوي وتضبط الجرعة مع مقشوش ومصابيب على أصولها!",
+      description: "ما قصرت وعلومك طيبة! بس يبيلك تروق برغفان وتضبط الجرعة مع مقشوش ومصابيب حارة عشان تقفل الـ 100%!",
       badge: "سعودي على الطريق",
-      audioTone: "cheer",
     };
   } else {
     return {
       percentage: 33,
       title: "سعوديتك 33%",
       subtitle: "يبيلك كورس مصابيب ومقشوش على أصوله! 😉",
-      description: "ولا يهمك! كل نتيجة اليوم فيها هدية مضمونة من رغفان.. مرّنا بالفرع وتذوق أصالة الأجداد بنفسك!",
+      description: "ولا يهمك! كل نتيجة اليوم فيها هدية مضمونة من رغفان.. تنورنا بالفرع وتذوق أصالة الأجداد بنفسك!",
       badge: "ضيف رغفان العزيز",
-      audioTone: "gentle",
     };
   }
 }
 
-// Function to draw a weighted prize
+// Draw a weighted prize from pool
 export function drawPrize(pool: Prize[] = PRIZE_POOL): Prize {
   const totalWeight = pool.reduce((acc, p) => acc + p.weight, 0);
   let random = Math.random() * totalWeight;
@@ -239,9 +247,8 @@ export function drawPrize(pool: Prize[] = PRIZE_POOL): Prize {
   return pool[0];
 }
 
-// Generate unique promo code
 export function generatePromoCode(prize: Prize): string {
-  const prefix = prize.isRare ? "RUGHFAN-VIP" : "RUGHFAN-95";
+  const prefix = prize.isRare ? "RUGHFAN-ROYAL" : "RUGHFAN-96";
   const randomSuffix = Math.random().toString(36).substring(2, 6).toUpperCase();
   return `${prefix}-${randomSuffix}`;
 }

@@ -8,10 +8,10 @@ export default {
     extend: {
       colors: {
         saudi: {
-          dark: "#0B3B24",
-          primary: "#0F4C2E",
-          emerald: "#14613B",
-          light: "#1A7547",
+          dark: "#082416",
+          primary: "#0D3E25",
+          emerald: "#125433",
+          light: "#1A6F44",
           accent: "#22C55E",
         },
         rughfan: {
@@ -21,32 +21,27 @@ export default {
           sand: "#F7F3EB",
           sandLight: "#FCFAF6",
           sandDark: "#E8DFCF",
-          brown: "#432C1A",
+          brown: "#3C2615",
           cream: "#FFFDF9",
         }
       },
       fontFamily: {
-        readex: ['"Readex Pro"', 'Tajawal', 'system-ui', 'sans-serif'],
-        tajawal: ['Tajawal', 'system-ui', 'sans-serif'],
+        almarai: ['"Almarai"', 'Tajawal', 'system-ui', 'sans-serif'],
+        tajawal: ['Tajawal', 'Almarai', 'system-ui', 'sans-serif'],
       },
       animation: {
         'pulse-slow': 'pulse 2.5s cubic-bezier(0.4, 0, 0.6, 1) infinite',
         'bounce-soft': 'bounceSoft 2s infinite',
-        'float': 'float 3s ease-in-out infinite',
-        'shimmer': 'shimmer 2s linear infinite',
+        'glow': 'glow 3s ease-in-out infinite',
       },
       keyframes: {
         bounceSoft: {
           '0%, 100%': { transform: 'translateY(0)' },
-          '50%': { transform: 'translateY(-6px)' },
+          '50%': { transform: 'translateY(-4px)' },
         },
-        float: {
-          '0%, 100%': { transform: 'translateY(0px) rotate(0deg)' },
-          '50%': { transform: 'translateY(-8px) rotate(1deg)' },
-        },
-        shimmer: {
-          '0%': { backgroundPosition: '-200% 0' },
-          '100%': { backgroundPosition: '200% 0' },
+        glow: {
+          '0%, 100%': { opacity: '0.6', transform: 'scale(1)' },
+          '50%': { opacity: '1', transform: 'scale(1.05)' },
         }
       }
     },
