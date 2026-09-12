@@ -229,6 +229,7 @@ export function App() {
               orderNumber={orderNumber}
               isExistingSession={isExistingSession}
               onOpenStoryCard={() => setIsStoryCardOpen(true)}
+              onPlayAgain={!ENABLE_LOCAL_STORAGE_LOCK ? handlePlayAgain : undefined}
             />
           )}
         </div>
