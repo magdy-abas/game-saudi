@@ -83,7 +83,7 @@ export const MysteryBoxModal: React.FC<MysteryBoxModalProps> = ({
         >
           <div className="w-64 h-56 relative bg-black">
             <img
-              src="/assets/box_luxury.jpg"
+              src="/assets/box_luxury.webp"
               alt="صندوق هدايا رغفان الفاخر"
               className="w-full h-full object-cover object-center"
             />

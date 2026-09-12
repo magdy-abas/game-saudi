@@ -32,8 +32,8 @@ export function App() {
   // Navigation & Customer State
   const [screen, setScreen] = useState<ScreenState>(initialScreen);
   const [customerName, setCustomerName] = useState<string>(urlParams.get("name") || "عبد العزيز");
-  const [orderNumber, setOrderNumber] = useState<string>(urlParams.get("order") || "104");
-  const [questionIndex, setQuestionIndex] = useState<number>(0);
+  const [phoneNumber, setPhoneNumber] = useState<string>(urlParams.get("phone") || urlParams.get("order") || "0501234567");
+  const [questionIndex, setQuestionIndex] = useState<number>(() => Number(urlParams.get("q") || 0));
   const [selectedAnswers, setSelectedAnswers] = useState<QuizOption[]>([]);
   const [isExistingSession, setIsExistingSession] = useState<boolean>(
     () => urlParams.get("existing") === "1"
@@ -69,7 +69,7 @@ export function App() {
         const session: UserSavedSession = JSON.parse(existingData);
         if (session && session.promoCode && session.prize) {
           setCustomerName(session.customerName || "");
-          setOrderNumber(session.orderNumber || "");
+          setPhoneNumber(session.phoneNumber || session.orderNumber || "");
           setDrawnPrize(session.prize);
           setPromoCode(session.promoCode);
           setSavedScorePercentage(session.scorePercentage ?? 100);
@@ -100,9 +100,9 @@ export function App() {
     setIsMuted(muted);
   };
 
-  const handleStartGame = (name: string, order: string) => {
+  const handleStartGame = (name: string, phone: string) => {
     setCustomerName(name);
-    setOrderNumber(order);
+    setPhoneNumber(phone);
     setQuestionIndex(0);
     setSelectedAnswers([]);
     setScreen("question");
@@ -128,7 +128,8 @@ export function App() {
       if (ENABLE_LOCAL_STORAGE_LOCK) {
         const sessionData: UserSavedSession = {
           customerName: customerName,
-          orderNumber: orderNumber,
+          phoneNumber: phoneNumber,
+          orderNumber: phoneNumber,
           prize: finalPrize,
           promoCode: finalCode,
           scorePercentage: calculatedScore,
@@ -150,7 +151,7 @@ export function App() {
     setQuestionIndex(0);
     setSelectedAnswers([]);
     setCustomerName("");
-    setOrderNumber("");
+    setPhoneNumber("");
     setIsExistingSession(false);
     setScreen("welcome");
   };
@@ -226,7 +227,7 @@ export function App() {
               promoCode={promoCode}
               scorePercentage={savedScorePercentage}
               customerName={customerName}
-              orderNumber={orderNumber}
+              phoneNumber={phoneNumber}
               isExistingSession={isExistingSession}
               onOpenStoryCard={() => setIsStoryCardOpen(true)}
               onPlayAgain={!ENABLE_LOCAL_STORAGE_LOCK ? handlePlayAgain : undefined}

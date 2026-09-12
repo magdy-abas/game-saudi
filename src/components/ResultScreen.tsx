@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import type { ScoreFeedback } from "../data/quizData";
-import { Gift, Sparkles, Trophy } from "lucide-react";
+import { Gift, Sparkles, Trophy, Music } from "lucide-react";
 import { soundManager } from "../utils/soundEffects";
 import { SaudiFlag } from "./SaudiFlag";
 import confetti from "canvas-confetti";
@@ -21,17 +21,24 @@ export const ResultScreen: React.FC<ResultScreenProps> = ({
   onShareStory,
 }) => {
   useEffect(() => {
-    // If 100%, fire celebratory confetti!
+    // Play national celebration anthem "عاش السعودي فوق فوق" starting from second 26
+    soundManager.playAnthem();
+
+    // Fire celebratory confetti!
     if (scoreFeedback.percentage === 100) {
-      soundManager.playFanfare();
       confetti({
-        particleCount: 80,
-        spread: 70,
+        particleCount: 90,
+        spread: 75,
         origin: { y: 0.6 },
         colors: ["#14613B", "#C58D38", "#FFFFFF", "#E6B366"],
       });
     } else {
-      soundManager.playCorrect();
+      confetti({
+        particleCount: 50,
+        spread: 60,
+        origin: { y: 0.6 },
+        colors: ["#14613B", "#C58D38", "#FFFFFF"],
+      });
     }
   }, [scoreFeedback.percentage]);
 
@@ -114,6 +121,12 @@ export const ResultScreen: React.FC<ResultScreenProps> = ({
           <p className="text-xs text-[#5C452C] mt-2 leading-relaxed max-w-xs mx-auto font-medium">
             {scoreFeedback.description}
           </p>
+
+          {/* Celebratory Anthem Tag */}
+          <div className="mt-2.5 inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-[#EADCC5]/60 border border-[#C58D38]/40 text-[#7A4C1A] text-[11px] font-bold shadow-sm">
+            <Music className="w-3.5 h-3.5 text-[#C58D38] animate-bounce" />
+            <span>«هذا السعودي فوق .. فوق 🇸🇦»</span>
+          </div>
 
           {/* Special 100% VIP Grand Raffle Entry Ribbon */}
           {scoreFeedback.percentage === 100 && (

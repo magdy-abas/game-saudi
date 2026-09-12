@@ -38,28 +38,28 @@ export const FIXED_QUESTIONS: Question[] = [
         text: "المصابيب",
         subtitle: "أقراص عسل وسمن بلدي",
         isCorrect: false,
-        image: "/assets/food_masabeeb.jpg",
+        image: "/assets/food_masabeeb.webp",
       },
       {
         id: "q1-2",
         text: "المرقوق",
         subtitle: "مرق اللحم والخضار التراثي",
         isCorrect: false,
-        image: "/assets/food_margoog.jpg",
+        image: "/assets/food_margoog.webp",
       },
       {
         id: "q1-3",
         text: "الجريش",
         subtitle: "قمح مهروس مع كشنة وسمن",
         isCorrect: false,
-        image: "/assets/food_jareesh.jpg",
+        image: "/assets/food_jareesh.webp",
       },
       {
         id: "q1-4",
         text: "المقشوش",
-        subtitle: "حلوى رغفان الوطنية الذهبية",
+        subtitle: "حلوى دافئة مقرمشة من الصاج",
         isCorrect: true,
-        image: "/assets/food_maqshoosh.jpg",
+        image: "/assets/food_maqshoosh.webp",
       },
     ],
   },
@@ -74,28 +74,28 @@ export const FIXED_QUESTIONS: Question[] = [
         text: "الكليجا",
         subtitle: "فخر القصيم بالتمر والهيل",
         isCorrect: false,
-        image: "/assets/food_kleeja.jpg",
+        image: "/assets/food_kleeja.webp",
       },
       {
         id: "q2-2",
         text: "المقشوش",
-        subtitle: "الحلوى الوطنية السعودية الرسمية",
+        subtitle: "أقراص ذهبية بالسمن والعسل والهيل",
         isCorrect: true,
-        image: "/assets/food_maqshoosh.jpg",
+        image: "/assets/food_maqshoosh.webp",
       },
       {
         id: "q2-3",
         text: "العصيدة",
         subtitle: "دبس التمر والزبدة الفاخرة",
         isCorrect: false,
-        image: "/assets/food_aseeda.jpg",
+        image: "/assets/food_aseeda.webp",
       },
       {
         id: "q2-4",
         text: "مصابيب العسل",
         subtitle: "مخبوزات الصاج التراثية",
         isCorrect: false,
-        image: "/assets/food_masabeeb.jpg",
+        image: "/assets/food_masabeeb.webp",
       },
     ],
   },
@@ -110,28 +110,28 @@ export const FIXED_QUESTIONS: Question[] = [
         text: "لأنه يُقش من الصاج",
         subtitle: "يُقش برفق بعد تحميره الذهبي",
         isCorrect: true,
-        image: "/assets/food_saj.jpg",
+        image: "/assets/food_saj.webp",
       },
       {
         id: "q3-2",
         text: "لأنه يُؤكل بالقاشوش",
         subtitle: "أداة تناول تراثية قديمة",
         isCorrect: false,
-        image: "/assets/food_maqshoosh.jpg",
+        image: "/assets/food_maqshoosh.webp",
       },
       {
         id: "q3-3",
         text: "نسبةً إلى نوع من التمر",
         subtitle: "أصناف نخيل الجزيرة العربية",
         isCorrect: false,
-        image: "/assets/food_kleeja.jpg",
+        image: "/assets/food_kleeja.webp",
       },
       {
         id: "q3-4",
         text: "نسبةً إلى منطقة حائل",
         subtitle: "من عروس الشمال وجبال أجا",
         isCorrect: false,
-        image: "/assets/hero_fortress.jpg",
+        image: "/assets/hero_fortress.webp",
       },
     ],
   },
@@ -145,7 +145,7 @@ export const PRIZE_POOL: Prize[] = [
     description: "صحن مقشوش ميني ساخن بالسمن والعسل البلدي مجاناً مع طلبك!",
     terms: "يتم استلام الجائزة مع الطلب داخل الفرع",
     weight: 35,
-    image: "/assets/food_maqshoosh.jpg",
+    image: "/assets/food_maqshoosh.webp",
   },
   {
     id: "free-coffee",
@@ -154,7 +154,7 @@ export const PRIZE_POOL: Prize[] = [
     description: "فنجال قهوة سعودية ملكية بالهيل والزعفران الشقر مجاناً مع طلبك!",
     terms: "صالحة للاستخدام المباشر مع طلبك داخل الفرع",
     weight: 30,
-    image: "/assets/food_coffee.jpg",
+    image: "/assets/food_coffee.webp",
   },
   {
     id: "discount-15",
@@ -163,7 +163,7 @@ export const PRIZE_POOL: Prize[] = [
     description: "خصم 15% فوري على إجمالي طلبك داخل فرع رغفان!",
     terms: "تطبق عند الطلب المباشر من الكاشير",
     weight: 20,
-    image: "/assets/food_masabeeb.jpg",
+    image: "/assets/food_masabeeb.webp",
   },
   {
     id: "credit-96",
@@ -172,7 +172,7 @@ export const PRIZE_POOL: Prize[] = [
     description: "خصم 9.6 ريال فورية احتفالاً باليوم الوطني 96 على طلبك القادم!",
     terms: "صالحة للاستخدام لمرة واحدة بالفرع لطلبك اليوم",
     weight: 15,
-    image: "/assets/food_maqshoosh.jpg",
+    image: "/assets/food_maqshoosh.webp",
   },
 ];
 
@@ -236,7 +236,8 @@ export function generatePromoCode(prize: Prize): string {
 
 export interface UserSavedSession {
   customerName: string;
-  orderNumber: string;
+  phoneNumber?: string;
+  orderNumber?: string;
   prize: Prize;
   promoCode: string;
   scorePercentage: number;

@@ -1,28 +1,66 @@
 import React, { useState } from "react";
 import { HeritageIllustration } from "./HeritageIllustration";
-import { Sparkles, Gift, ChevronLeft, User, Receipt, AlertCircle } from "lucide-react";
+import { Sparkles, Gift, ChevronLeft, User, Phone, AlertCircle } from "lucide-react";
 import { soundManager } from "../utils/soundEffects";
 import { SaudiFlag } from "./SaudiFlag";
 
 interface WelcomeScreenProps {
-  onStart: (customerName: string, orderNumber: string) => void;
+  onStart: (customerName: string, phoneNumber: string) => void;
+}
+
+export function validateSaudiMobile(input: string): { isValid: boolean; normalized: string; error?: string } {
+  const cleaned = input.trim().replace(/[\s\-\(\)]/g, "");
+
+  if (!cleaned) {
+    return { isValid: false, normalized: "", error: "فضلاً أدخل رقم الجوال للتواصل واستلام الهدية 📱" };
+  }
+
+  let formatted = cleaned;
+  if (formatted.startsWith("+966")) {
+    formatted = "0" + formatted.slice(4);
+  } else if (formatted.startsWith("00966")) {
+    formatted = "0" + formatted.slice(5);
+  } else if (formatted.startsWith("966")) {
+    formatted = "0" + formatted.slice(3);
+  } else if (formatted.startsWith("5") && formatted.length === 9) {
+    formatted = "0" + formatted;
+  }
+
+  const saudiRegex = /^05[0-9]{8}$/;
+  if (!saudiRegex.test(formatted)) {
+    return {
+      isValid: false,
+      normalized: formatted,
+      error: "رقم الجوال يجب أن يكون رقم سعودي صحيح يبدأ بـ 05 (مثال: 05XXXXXXXX) 🇸🇦",
+    };
+  }
+
+  return { isValid: true, normalized: formatted };
 }
 
 export const WelcomeScreen: React.FC<WelcomeScreenProps> = ({ onStart }) => {
   const [customerName, setCustomerName] = useState("");
-  const [orderNumber, setOrderNumber] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
   const [error, setError] = useState<string | null>(null);
 
   const handleStart = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!customerName.trim() || !orderNumber.trim()) {
-      setError("فضلاً اكتب اسمك ورقم الأوردر لبدء اللعبة ✍️");
+    if (!customerName.trim()) {
+      setError("فضلاً اكتب اسمك الكريم لبدء اللعبة ✍️");
       soundManager.playClick();
       return;
     }
+
+    const phoneResult = validateSaudiMobile(phoneNumber);
+    if (!phoneResult.isValid) {
+      setError(phoneResult.error || "فضلاً أدخل رقم جوال سعودي صحيح 📱");
+      soundManager.playClick();
+      return;
+    }
+
     setError(null);
     soundManager.playClick();
-    onStart(customerName.trim(), orderNumber.trim());
+    onStart(customerName.trim(), phoneResult.normalized);
   };
 
   return (
@@ -90,22 +128,34 @@ export const WelcomeScreen: React.FC<WelcomeScreenProps> = ({ onStart }) => {
             />
           </div>
 
-          {/* Input 2: Order Number */}
+          {/* Input 2: Saudi Mobile Phone */}
           <div className="space-y-1">
-            <label className="text-[11px] font-bold text-[#63492F] flex items-center gap-1">
-              <Receipt className="w-3.5 h-3.5 text-[#C58D38]" />
-              <span>رقم الأوردر (من الفاتورة):</span>
+            <label className="text-[11px] font-bold text-[#63492F] flex items-center justify-between">
+              <span className="flex items-center gap-1">
+                <Phone className="w-3.5 h-3.5 text-[#C58D38]" />
+                <span>رقم الجوال:</span>
+              </span>
+              <span className="text-[10px] text-[#937554] font-normal">لاستلام وتوثيق الهدية</span>
             </label>
-            <input
-              type="text"
-              value={orderNumber}
-              onChange={(e) => {
-                setOrderNumber(e.target.value);
-                if (error) setError(null);
-              }}
-              placeholder="مثال: 104 أو 582"
-              className="w-full bg-white border border-[#D5C6AC] rounded-xl px-3.5 py-2.5 text-xs text-[#2B1B06] placeholder-[#A08E77] focus:outline-none focus:border-[#0F4C2E] focus:ring-1 focus:ring-[#0F4C2E] transition-all"
-            />
+            <div className="relative flex items-center">
+              <input
+                type="tel"
+                dir="ltr"
+                value={phoneNumber}
+                onChange={(e) => {
+                  setPhoneNumber(e.target.value);
+                  if (error) setError(null);
+                }}
+                placeholder="05XXXXXXXX"
+                maxLength={14}
+                className="w-full bg-white border border-[#D5C6AC] rounded-xl pl-3.5 pr-20 py-2.5 text-xs text-[#2B1B06] placeholder-[#A08E77] focus:outline-none focus:border-[#0F4C2E] focus:ring-1 focus:ring-[#0F4C2E] font-mono tracking-wider transition-all text-left"
+              />
+              {/* Saudi Badge inside input */}
+              <div className="absolute right-2.5 flex items-center gap-1.5 pointer-events-none pl-2 border-l border-[#E3D7C1]">
+                <SaudiFlag size="sm" />
+                <span className="text-[11px] font-bold text-[#4D361F] font-mono" dir="ltr">+966</span>
+              </div>
+            </div>
           </div>
 
           {/* Error Message */}

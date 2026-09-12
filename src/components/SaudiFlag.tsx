@@ -10,43 +10,21 @@ export const SaudiFlag: React.FC<SaudiFlagProps> = ({
   size = "md",
 }) => {
   const dimensions = {
-    sm: "w-5 h-3.5",
-    md: "w-7 h-5",
-    lg: "w-10 h-7",
+    sm: "w-6 h-4",
+    md: "w-8 h-5.5",
+    lg: "w-11 h-7.5",
   }[size];
 
   return (
     <span
-      className={`inline-flex items-center justify-center rounded overflow-hidden shadow-sm border border-emerald-700/40 select-none ${dimensions} ${className}`}
-      title="المملكة العربية السعودية"
+      className={`inline-flex items-center justify-center rounded overflow-hidden shadow-sm border border-emerald-600/40 select-none shrink-0 ${dimensions} ${className}`}
+      title="علم المملكة العربية السعودية"
     >
-      <svg
-        viewBox="0 0 30 20"
-        className="w-full h-full"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        {/* Saudi Emerald Green Base */}
-        <rect width="30" height="20" fill="#0E773E" />
-
-        {/* Stylized White Shahada Calligraphy Bar */}
-        <path
-          d="M6 8.5 Q15 7.5 24 8.5"
-          stroke="#FFFFFF"
-          strokeWidth="1.6"
-          strokeLinecap="round"
-        />
-        <line x1="8" y1="6.8" x2="22" y2="6.8" stroke="#FFFFFF" strokeWidth="0.8" strokeLinecap="round" />
-
-        {/* Saudi Ceremonial Sword */}
-        <g transform="translate(0, 1.5)">
-          {/* Blade */}
-          <line x1="8" y1="11.5" x2="22" y2="11.5" stroke="#FFFFFF" strokeWidth="1.1" strokeLinecap="round" />
-          {/* Hilt and Crossguard */}
-          <line x1="21.5" y1="10" x2="21.5" y2="13" stroke="#FFFFFF" strokeWidth="1.2" strokeLinecap="round" />
-          <line x1="23" y1="11.5" x2="21.5" y2="11.5" stroke="#FFFFFF" strokeWidth="1.5" strokeLinecap="round" />
-        </g>
-      </svg>
+      <img
+        src="/assets/saudi_flag.svg"
+        alt="علم المملكة العربية السعودية"
+        className="w-full h-full object-cover object-center"
+      />
     </span>
   );
 };

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import type { Prize } from "../data/quizData";
-import { Copy, Check, Share2, Download, QrCode, User, Receipt, ShieldCheck, RotateCcw } from "lucide-react";
+import { Copy, Check, Share2, Download, QrCode, User, Phone, ShieldCheck, RotateCcw } from "lucide-react";
 import { soundManager } from "../utils/soundEffects";
 import QRCode from "qrcode";
 
@@ -9,6 +9,7 @@ interface PrizeScreenProps {
   promoCode: string;
   scorePercentage: number;
   customerName?: string;
+  phoneNumber?: string;
   orderNumber?: string;
   isExistingSession?: boolean;
   onOpenStoryCard: () => void;
@@ -20,6 +21,7 @@ export const PrizeScreen: React.FC<PrizeScreenProps> = ({
   promoCode,
   scorePercentage,
   customerName = "",
+  phoneNumber = "",
   orderNumber = "",
   isExistingSession = false,
   onOpenStoryCard,
@@ -27,11 +29,12 @@ export const PrizeScreen: React.FC<PrizeScreenProps> = ({
 }) => {
   const [copied, setCopied] = useState(false);
   const [qrDataUrl, setQrDataUrl] = useState<string>("");
+  const contactNumber = phoneNumber || orderNumber;
 
   useEffect(() => {
     // Generate QR Code data URL for cashier scanning
     QRCode.toDataURL(
-      `RUGHFAN-VOUCHER:${promoCode}|ORDER:${orderNumber}|NAME:${customerName}|PRIZE:${prize.id}`,
+      `RUGHFAN-VOUCHER:${promoCode}|PHONE:${contactNumber}|NAME:${customerName}|PRIZE:${prize.id}`,
       {
         width: 160,
         margin: 1,
@@ -45,7 +48,7 @@ export const PrizeScreen: React.FC<PrizeScreenProps> = ({
         setQrDataUrl(url);
       })
       .catch(() => {});
-  }, [promoCode, prize.id, orderNumber, customerName]);
+  }, [promoCode, prize.id, contactNumber, customerName]);
 
   const handleCopyCode = () => {
     navigator.clipboard.writeText(promoCode);
@@ -99,7 +102,7 @@ export const PrizeScreen: React.FC<PrizeScreenProps> = ({
           {/* Visual Showcase Box with Enlarged Real Dish Photo */}
           <div className="w-full h-48 sm:h-56 rounded-2xl border-2 border-[#C58D38]/60 overflow-hidden relative shadow-lg mb-3 bg-black group">
             <img
-              src={prize.image || "/assets/food_maqshoosh.jpg"}
+              src={prize.image || "/assets/food_maqshoosh.webp"}
               alt={prize.title}
               className="w-full h-full object-cover object-center transform group-hover:scale-105 transition-transform duration-500"
             />
@@ -108,7 +111,7 @@ export const PrizeScreen: React.FC<PrizeScreenProps> = ({
             {/* Prominent RUGHFAN Brand Stamp */}
             <div className="absolute top-2.5 right-2.5 flex items-center gap-1.5 bg-[#0F3823]/90 backdrop-blur-md px-3 py-1 rounded-full border border-[#C58D38]/70 shadow-lg">
               <img
-                src="/assets/logo.png"
+                src="/assets/logo.webp"
                 alt="رغفان"
                 className="w-5 h-5 rounded-full object-contain bg-[#FAF7F0] p-0.5"
               />
@@ -124,19 +127,19 @@ export const PrizeScreen: React.FC<PrizeScreenProps> = ({
             )}
           </div>
 
-          {/* Customer & Order Badge info */}
-          {(customerName || orderNumber) && (
-            <div className="flex items-center justify-center gap-3 text-[11px] font-bold text-[#6D4C28] mb-1.5 bg-[#F2EADA] py-1 px-2.5 rounded-lg">
+          {/* Customer & Phone Badge info */}
+          {(customerName || contactNumber) && (
+            <div className="flex items-center justify-center gap-3 text-[11px] font-bold text-[#6D4C28] mb-1.5 bg-[#F2EADA] py-1 px-3 rounded-lg">
               {customerName && (
                 <span className="flex items-center gap-1">
-                  <User className="w-3 h-3 text-[#C58D38]" />
+                  <User className="w-3.5 h-3.5 text-[#C58D38]" />
                   <span>{customerName}</span>
                 </span>
               )}
-              {orderNumber && (
-                <span className="flex items-center gap-1">
-                  <Receipt className="w-3 h-3 text-[#C58D38]" />
-                  <span>طلب #{orderNumber}</span>
+              {contactNumber && (
+                <span className="flex items-center gap-1 font-mono">
+                  <Phone className="w-3.5 h-3.5 text-[#C58D38]" />
+                  <span dir="ltr">{contactNumber}</span>
                 </span>
               )}
             </div>

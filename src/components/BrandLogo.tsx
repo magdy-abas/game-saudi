@@ -23,7 +23,7 @@ export const BrandLogo: React.FC<BrandLogoProps> = ({
         className={`${containerClasses} rounded-full bg-[#FAF7F0] border-2 border-[#C58D38] ring-2 ring-[#DFB06C]/30 shadow-[0_4px_16px_rgba(0,0,0,0.35)] flex items-center justify-center overflow-hidden transform hover:scale-105 transition-transform`}
       >
         <img
-          src="/assets/logo.png"
+          src="/assets/logo.webp"
           alt="رغفان - RUGHFAN"
           className="w-full h-full object-contain"
         />

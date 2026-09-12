@@ -28,7 +28,7 @@ export const HeritageIllustration: React.FC<HeritageIllustrationProps> = ({
       {/* Real Cinematic Saudi Heritage Fortress with Waving Flag & Glowing Rughfan Logo */}
       <div className="relative w-full h-55 sm:h-52 overflow-hidden">
         <img
-          src="/assets/hero_fortress.jpg"
+          src="/assets/hero_fortress.webp"
           alt="قصر المصمك والعلم السعودي - رغفان"
           className="w-full h-full object-cover object-center transform group-hover:scale-105 transition-transform duration-700 ease-out"
         />

@@ -3,6 +3,7 @@
 class SoundManager {
   private ctx: AudioContext | null = null;
   public isMuted: boolean = false;
+  private anthemAudio: HTMLAudioElement | null = null;
 
   private initCtx() {
     if (!this.ctx && typeof window !== "undefined") {
@@ -18,7 +19,38 @@ class SoundManager {
 
   public toggleMute(): boolean {
     this.isMuted = !this.isMuted;
+    if (this.isMuted) {
+      this.stopAnthem();
+    }
     return this.isMuted;
+  }
+
+  // Play national celebration anthem "عاش السعودي فوق فوق" (from 0:26)
+  public playAnthem() {
+    if (this.isMuted) return;
+    try {
+      if (!this.anthemAudio) {
+        this.anthemAudio = new Audio("/assets/anthem.mp3");
+        this.anthemAudio.volume = 0.8;
+      }
+      this.anthemAudio.currentTime = 0;
+      this.anthemAudio.play().catch(() => {
+        // Autoplay policy fallback
+      });
+    } catch {
+      // Audio element fallback
+    }
+  }
+
+  public stopAnthem() {
+    try {
+      if (this.anthemAudio) {
+        this.anthemAudio.pause();
+        this.anthemAudio.currentTime = 0;
+      }
+    } catch {
+      // Ignore
+    }
   }
 
   // Soft button click
