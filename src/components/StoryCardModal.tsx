@@ -54,27 +54,35 @@ export const StoryCardModal: React.FC<StoryCardModalProps> = ({
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-3 bg-black/85 backdrop-blur-sm animate-fadeIn overflow-y-auto">
-      <div className="relative w-full max-w-sm flex flex-col items-center my-auto">
-        {/* Close Button */}
-        <button
-          onClick={onClose}
-          className="absolute -top-10 left-0 w-8 h-8 rounded-full bg-white/20 hover:bg-white/30 text-white flex items-center justify-center"
-        >
-          <X className="w-5 h-5" />
-        </button>
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-black/90 backdrop-blur-md animate-fadeIn overflow-y-auto">
+      <div className="relative w-full max-w-sm flex flex-col items-center my-auto pt-2 pb-4">
+        {/* Top Control Bar with Name input & Prominent Close Button */}
+        <div className="w-full flex items-center gap-2 mb-2.5">
+          {/* Customization input */}
+          <div className="flex-1 bg-[#14452B] border border-[#C58D38]/40 rounded-2xl px-3 py-2 flex items-center gap-2 shadow-md">
+            <span className="text-xs text-[#DFB06C] shrink-0 font-bold">اسمك بالكرت:</span>
+            <input
+              type="text"
+              value={playerName}
+              onChange={(e) => setPlayerName(e.target.value)}
+              maxLength={25}
+              className="flex-1 bg-black/40 border border-white/20 rounded-lg px-2.5 py-1 text-white text-xs font-semibold focus:outline-none focus:border-[#DFB06C]"
+              placeholder="اكتب اسمك للمشاركة..."
+            />
+          </div>
 
-        {/* Customization input */}
-        <div className="w-full bg-[#14452B] border border-[#C58D38]/40 rounded-2xl p-2.5 mb-3 flex items-center gap-2">
-          <span className="text-xs text-[#DFB06C] shrink-0 font-medium">اسمك بالكرت:</span>
-          <input
-            type="text"
-            value={playerName}
-            onChange={(e) => setPlayerName(e.target.value)}
-            maxLength={25}
-            className="flex-1 bg-black/30 border border-white/20 rounded-lg px-2.5 py-1 text-white text-xs font-semibold focus:outline-none focus:border-[#DFB06C]"
-            placeholder="اكتب اسمك للمشاركة..."
-          />
+          {/* Fully visible and thumb-friendly Close Button */}
+          <button
+            onClick={() => {
+              soundManager.playClick();
+              onClose();
+            }}
+            className="w-10 h-10 shrink-0 rounded-2xl bg-[#C58D38] hover:bg-[#DFB06C] text-[#1E1303] flex items-center justify-center shadow-lg transition-all active:scale-95 cursor-pointer font-bold"
+            title="إغلاق الستوري"
+            aria-label="إغلاق"
+          >
+            <X className="w-5 h-5 stroke-[2.5]" />
+          </button>
         </div>
 
         {/* The 9:16 Vertical Story Card (To be exported as image) */}
