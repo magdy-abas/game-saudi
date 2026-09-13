@@ -54,8 +54,14 @@ export const StoryCardModal: React.FC<StoryCardModalProps> = ({
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-black/90 backdrop-blur-md animate-fadeIn overflow-y-auto">
-      <div className="relative w-full max-w-sm flex flex-col items-center my-auto pt-2 pb-4">
+    <div
+      className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-black/90 backdrop-blur-md animate-fadeIn overflow-y-auto cursor-pointer"
+      onClick={onClose}
+    >
+      <div
+        className="relative w-full max-w-sm flex flex-col items-center my-auto pt-2 pb-4 cursor-default"
+        onClick={(e) => e.stopPropagation()}
+      >
         {/* Top Control Bar with Name input & Prominent Close Button */}
         <div className="w-full flex items-center gap-2 mb-2.5">
           {/* Customization input */}

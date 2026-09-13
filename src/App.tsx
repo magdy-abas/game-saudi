@@ -20,10 +20,8 @@ import { soundManager } from "./utils/soundEffects";
 type ScreenState = "welcome" | "question" | "result" | "prize";
 const STORAGE_KEY = "rughfan_quiz_session_v1";
 
-// ⚠️ مفتاح تفعيل/تعطيل حفظ الجلسة في localStorage:
-// مضبوط حالياً على false لتسهيل إجراء الفحوصات والتجارب المتكررة
-// عند الانتهاء من التست، يتم تحويله إلى true لتفعيل قفل المحاولة الواحدة لكل جهاز
-export const ENABLE_LOCAL_STORAGE_LOCK = false;
+// ✅ مفتاح تفعيل حفظ الجلسة في localStorage مفعل للإنتاج (محاولة واحدة لكل جهاز)
+export const ENABLE_LOCAL_STORAGE_LOCK = true;
 
 export function App() {
   const urlParams = useMemo(() => new URLSearchParams(window.location.search), []);
