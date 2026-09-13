@@ -25,17 +25,27 @@ class SoundManager {
     return this.isMuted;
   }
 
-  // Play national celebration anthem "عاش السعودي فوق فوق" (from 0:26)
+  // Play national celebration anthem using user provided song.m4a with looping condition
   public playAnthem() {
     if (this.isMuted) return;
     try {
       if (!this.anthemAudio) {
-        this.anthemAudio = new Audio("/assets/anthem.mp3");
-        this.anthemAudio.volume = 0.8;
+        this.anthemAudio = new Audio("/assets/song.m4a");
+        this.anthemAudio.volume = 0.85;
+        this.anthemAudio.loop = true; // شرط التكرار التلقائي عند الانتهاء
+
+        // Event listener fallback to ensure continuous looping on all mobile browsers
+        this.anthemAudio.addEventListener("ended", () => {
+          if (!this.isMuted && this.anthemAudio) {
+            this.anthemAudio.currentTime = 0;
+            this.anthemAudio.play().catch(() => {});
+          }
+        });
       }
+      this.anthemAudio.loop = true;
       this.anthemAudio.currentTime = 0;
       this.anthemAudio.play().catch(() => {
-        // Autoplay policy fallback
+        // Autoplay policy fallback (will trigger on next user touch)
       });
     } catch {
       // Audio element fallback
